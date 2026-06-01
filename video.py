@@ -28,18 +28,20 @@ def generate_video(group, teams):
 
     positions = [200, 400, 600, 800]
 
-    # 🟢 حركة الكرات (نصوص بدل TextClip)
+    # 🟢 حركة اللاعبين (بدون TextClip نهائياً)
     for i, p in enumerate(players):
 
         speed = p.speed
 
-        clip = create_text_clip(p.name, duration).set_position(
+        ball = create_text_clip(p.name, duration)
+
+        ball = ball.set_position(
             lambda t, i=i, s=speed: (50 + t * s, positions[i])
         )
 
-        clips.append(clip)
+        clips.append(ball)
 
-    # 🟢 دمج المشهد
+    # 🟢 تركيب المشهد
     final = mpy.CompositeVideoClip([background] + clips)
 
     # 🟢 تحديد الفائزين
